@@ -1,4 +1,4 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, NgModule, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostListener, Injectable, Input, NgModule, Output, Pipe } from '@angular/core';
 import { Observable as Observable$1 } from 'rxjs/Observable';
 import { Subject as Subject$1 } from 'rxjs/Subject';
 import 'rxjs/add/operator/mergeMap';
@@ -570,6 +570,56 @@ var NgFileSelectDirective = (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+/**
+ * Transforms any input value
+ */
+var SamplePipe = (function () {
+    function SamplePipe() {
+    }
+    /**
+     * @param {?} value
+     * @param {?=} args
+     * @return {?}
+     */
+    SamplePipe.prototype.transform = /**
+     * @param {?} value
+     * @param {?=} args
+     * @return {?}
+     */
+    function (value, args) {
+        if (args === void 0) { args = null; }
+        return value;
+    };
+    SamplePipe.decorators = [
+        { type: Pipe, args: [{
+                    name: 'samplePipe'
+                },] },
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    SamplePipe.ctorParameters = function () { return []; };
+    return SamplePipe;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var SampleService = (function () {
+    function SampleService() {
+    }
+    SampleService.decorators = [
+        { type: Injectable },
+    ];
+    /** @nocollapse */
+    SampleService.ctorParameters = function () { return []; };
+    return SampleService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var NgUploaderModule = (function () {
     function NgUploaderModule() {
     }
@@ -590,4 +640,4 @@ var NgUploaderModule = (function () {
     return NgUploaderModule;
 }());
 
-export { NgUploaderModule };
+export { NgUploaderModule, UploadStatus, humanizeBytes, NgUploaderService, NgFileDropDirective, NgFileSelectDirective, SamplePipe, SampleService };

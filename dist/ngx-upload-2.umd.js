@@ -571,6 +571,56 @@ var NgFileSelectDirective = (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+/**
+ * Transforms any input value
+ */
+var SamplePipe = (function () {
+    function SamplePipe() {
+    }
+    /**
+     * @param {?} value
+     * @param {?=} args
+     * @return {?}
+     */
+    SamplePipe.prototype.transform = /**
+     * @param {?} value
+     * @param {?=} args
+     * @return {?}
+     */
+    function (value, args) {
+        if (args === void 0) { args = null; }
+        return value;
+    };
+    SamplePipe.decorators = [
+        { type: core.Pipe, args: [{
+                    name: 'samplePipe'
+                },] },
+        { type: core.Injectable },
+    ];
+    /** @nocollapse */
+    SamplePipe.ctorParameters = function () { return []; };
+    return SamplePipe;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var SampleService = (function () {
+    function SampleService() {
+    }
+    SampleService.decorators = [
+        { type: core.Injectable },
+    ];
+    /** @nocollapse */
+    SampleService.ctorParameters = function () { return []; };
+    return SampleService;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
 var NgUploaderModule = (function () {
     function NgUploaderModule() {
     }
@@ -592,6 +642,13 @@ var NgUploaderModule = (function () {
 }());
 
 exports.NgUploaderModule = NgUploaderModule;
+exports.UploadStatus = UploadStatus;
+exports.humanizeBytes = humanizeBytes;
+exports.NgUploaderService = NgUploaderService;
+exports.NgFileDropDirective = NgFileDropDirective;
+exports.NgFileSelectDirective = NgFileSelectDirective;
+exports.SamplePipe = SamplePipe;
+exports.SampleService = SampleService;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
