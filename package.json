@@ -12,7 +12,8 @@
     "lite": "lite-server",
     "playground:build": "tsc -p playground -w",
     "playground": "concurrently \"npm run build:watch\" \"npm run playground:build\" \"npm run lite\"",
-    "test": "tsc && karma start"
+    "test": "tsc && karma start",
+    "post:build": "rm  ./src/classes/*.js ./src/classes/*.json ./src/directives/*.js ./src/directives/*.json"
   },
   "repository": {
     "type": "git",
