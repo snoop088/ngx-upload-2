@@ -4,49 +4,16 @@
 	(factory((global['ngx-upload-2'] = {}),global.core,global.Observable,global.Subject));
 }(this, (function (exports,core,Observable,Subject) { 'use strict';
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @record
- */
-
-/**
- * @record
- */
-
-/** @enum {number} */
-var UploadStatus = {
-    Queue: 0,
-    Uploading: 1,
-    Done: 2,
-    Cancelled: 3,
-};
+var UploadStatus = {};
+UploadStatus.Queue = 0;
+UploadStatus.Uploading = 1;
+UploadStatus.Done = 2;
+UploadStatus.Cancelled = 3;
 UploadStatus[UploadStatus.Queue] = "Queue";
 UploadStatus[UploadStatus.Uploading] = "Uploading";
 UploadStatus[UploadStatus.Done] = "Done";
 UploadStatus[UploadStatus.Cancelled] = "Cancelled";
-/**
- * @record
- */
 
-/**
- * @record
- */
-
-/**
- * @record
- */
-
-/**
- * @record
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
 /**
  * @param {?} bytes
  * @return {?}
@@ -61,6 +28,11 @@ function humanizeBytes(bytes) {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }
 var NgUploaderService = (function () {
+    /**
+     * @param {?=} concurrency
+     * @param {?=} contentTypes
+     * @param {?=} allowFile
+     */
     function NgUploaderService(concurrency, contentTypes, allowFile) {
         if (concurrency === void 0) { concurrency = Number.POSITIVE_INFINITY; }
         if (contentTypes === void 0) { contentTypes = ['*']; }
@@ -80,11 +52,7 @@ var NgUploaderService = (function () {
      * @param {?} incomingFiles
      * @return {?}
      */
-    NgUploaderService.prototype.handleFiles = /**
-     * @param {?} incomingFiles
-     * @return {?}
-     */
-    function (incomingFiles) {
+    NgUploaderService.prototype.handleFiles = function (incomingFiles) {
         var _this = this;
         var /** @type {?} */ allowedIncomingFiles = [].reduce.call(incomingFiles, function (acc, checkFile, i) {
             if (_this.isContentTypeAllowed(checkFile.type) && _this.allowFile) {
@@ -108,11 +76,7 @@ var NgUploaderService = (function () {
      * @param {?} input
      * @return {?}
      */
-    NgUploaderService.prototype.initInputEvents = /**
-     * @param {?} input
-     * @return {?}
-     */
-    function (input) {
+    NgUploaderService.prototype.initInputEvents = function (input) {
         var _this = this;
         return input.subscribe(function (event) {
             switch (event.type) {
@@ -177,11 +141,7 @@ var NgUploaderService = (function () {
      * @param {?} upload
      * @return {?}
      */
-    NgUploaderService.prototype.startUpload = /**
-     * @param {?} upload
-     * @return {?}
-     */
-    function (upload) {
+    NgUploaderService.prototype.startUpload = function (upload) {
         var _this = this;
         return new Observable.Observable(function (observer) {
             var /** @type {?} */ sub = _this.uploadFile(upload.file, upload.event)
@@ -201,12 +161,7 @@ var NgUploaderService = (function () {
      * @param {?} event
      * @return {?}
      */
-    NgUploaderService.prototype.uploadFile = /**
-     * @param {?} file
-     * @param {?} event
-     * @return {?}
-     */
-    function (file, event) {
+    NgUploaderService.prototype.uploadFile = function (file, event) {
         var _this = this;
         return new Observable.Observable(function (observer) {
             var /** @type {?} */ url = event.url || '';
@@ -263,7 +218,7 @@ var NgUploaderService = (function () {
                     try {
                         file.response = JSON.parse(xhr.response);
                     }
-                    catch (/** @type {?} */ e) {
+                    catch (e) {
                         file.response = xhr.response;
                     }
                     observer.next({ type: 'done', file: file });
@@ -273,7 +228,7 @@ var NgUploaderService = (function () {
             xhr.open(method, url, true);
             xhr.withCredentials = event.withCredentials ? true : false;
             try {
-                var /** @type {?} */ uploadFile_1 = /** @type {?} */ (file.nativeFile);
+                var /** @type {?} */ uploadFile_1 = (file.nativeFile);
                 var /** @type {?} */ uploadIndex = _this.queue.findIndex(function (outFile) { return outFile.nativeFile === uploadFile_1; });
                 if (_this.queue[uploadIndex].progress.status === UploadStatus.Cancelled) {
                     observer.complete();
@@ -284,7 +239,7 @@ var NgUploaderService = (function () {
                 _this.serviceEvents.emit({ type: 'start', file: file });
                 xhr.send(file.form);
             }
-            catch (/** @type {?} */ e) {
+            catch (e) {
                 observer.complete();
             }
             return function () {
@@ -296,31 +251,20 @@ var NgUploaderService = (function () {
      * @param {?} sec
      * @return {?}
      */
-    NgUploaderService.prototype.secondsToHuman = /**
-     * @param {?} sec
-     * @return {?}
-     */
-    function (sec) {
+    NgUploaderService.prototype.secondsToHuman = function (sec) {
         return new Date(sec * 1000).toISOString().substr(11, 8);
     };
     /**
      * @return {?}
      */
-    NgUploaderService.prototype.generateId = /**
-     * @return {?}
-     */
-    function () {
+    NgUploaderService.prototype.generateId = function () {
         return Math.random().toString(36).substring(7);
     };
     /**
      * @param {?} contentTypes
      * @return {?}
      */
-    NgUploaderService.prototype.setContentTypes = /**
-     * @param {?} contentTypes
-     * @return {?}
-     */
-    function (contentTypes) {
+    NgUploaderService.prototype.setContentTypes = function (contentTypes) {
         if (typeof contentTypes !== 'undefined' && contentTypes instanceof Array) {
             if (contentTypes.find(function (type) { return type === '*'; }) !== undefined) {
                 this.contentTypes = ['*'];
@@ -335,21 +279,14 @@ var NgUploaderService = (function () {
     /**
      * @return {?}
      */
-    NgUploaderService.prototype.allContentTypesAllowed = /**
-     * @return {?}
-     */
-    function () {
+    NgUploaderService.prototype.allContentTypesAllowed = function () {
         return this.contentTypes.find(function (type) { return type === '*'; }) !== undefined;
     };
     /**
      * @param {?} mimetype
      * @return {?}
      */
-    NgUploaderService.prototype.isContentTypeAllowed = /**
-     * @param {?} mimetype
-     * @return {?}
-     */
-    function (mimetype) {
+    NgUploaderService.prototype.isContentTypeAllowed = function (mimetype) {
         if (this.allContentTypesAllowed()) {
             return true;
         }
@@ -360,12 +297,7 @@ var NgUploaderService = (function () {
      * @param {?} index
      * @return {?}
      */
-    NgUploaderService.prototype.makeUploadFile = /**
-     * @param {?} file
-     * @param {?} index
-     * @return {?}
-     */
-    function (file, index) {
+    NgUploaderService.prototype.makeUploadFile = function (file, index) {
         return {
             fileIndex: index,
             id: this.generateId(),
@@ -393,11 +325,10 @@ var NgUploaderService = (function () {
     return NgUploaderService;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
 var NgFileDropDirective = (function () {
+    /**
+     * @param {?} elementRef
+     */
     function NgFileDropDirective(elementRef) {
         this.elementRef = elementRef;
         this.stopEvent = function (e) {
@@ -409,10 +340,7 @@ var NgFileDropDirective = (function () {
     /**
      * @return {?}
      */
-    NgFileDropDirective.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
+    NgFileDropDirective.prototype.ngOnInit = function () {
         var _this = this;
         this._sub = [];
         var /** @type {?} */ concurrency = this.options && this.options.concurrency || Number.POSITIVE_INFINITY;
@@ -433,21 +361,14 @@ var NgFileDropDirective = (function () {
     /**
      * @return {?}
      */
-    NgFileDropDirective.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
+    NgFileDropDirective.prototype.ngOnDestroy = function () {
         this._sub.forEach(function (sub) { return sub.unsubscribe(); });
     };
     /**
      * @param {?} e
      * @return {?}
      */
-    NgFileDropDirective.prototype.onDrop = /**
-     * @param {?} e
-     * @return {?}
-     */
-    function (e) {
+    NgFileDropDirective.prototype.onDrop = function (e) {
         e.stopPropagation();
         e.preventDefault();
         var /** @type {?} */ event = { type: 'drop' };
@@ -458,11 +379,7 @@ var NgFileDropDirective = (function () {
      * @param {?} e
      * @return {?}
      */
-    NgFileDropDirective.prototype.onDragOver = /**
-     * @param {?} e
-     * @return {?}
-     */
-    function (e) {
+    NgFileDropDirective.prototype.onDragOver = function (e) {
         if (!e) {
             return;
         }
@@ -473,11 +390,7 @@ var NgFileDropDirective = (function () {
      * @param {?} e
      * @return {?}
      */
-    NgFileDropDirective.prototype.onDragLeave = /**
-     * @param {?} e
-     * @return {?}
-     */
-    function (e) {
+    NgFileDropDirective.prototype.onDragLeave = function (e) {
         if (!e) {
             return;
         }
@@ -489,26 +402,27 @@ var NgFileDropDirective = (function () {
                     selector: '[ngFileDrop]'
                 },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     NgFileDropDirective.ctorParameters = function () { return [
         { type: core.ElementRef, },
     ]; };
     NgFileDropDirective.propDecorators = {
-        "options": [{ type: core.Input },],
-        "uploadInput": [{ type: core.Input },],
-        "uploadOutput": [{ type: core.Output },],
-        "onDrop": [{ type: core.HostListener, args: ['drop', ['$event'],] },],
-        "onDragOver": [{ type: core.HostListener, args: ['dragover', ['$event'],] },],
-        "onDragLeave": [{ type: core.HostListener, args: ['dragleave', ['$event'],] },],
+        'options': [{ type: core.Input },],
+        'uploadInput': [{ type: core.Input },],
+        'uploadOutput': [{ type: core.Output },],
+        'onDrop': [{ type: core.HostListener, args: ['drop', ['$event'],] },],
+        'onDragOver': [{ type: core.HostListener, args: ['dragover', ['$event'],] },],
+        'onDragLeave': [{ type: core.HostListener, args: ['dragleave', ['$event'],] },],
     };
     return NgFileDropDirective;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
 var NgFileSelectDirective = (function () {
+    /**
+     * @param {?} elementRef
+     */
     function NgFileSelectDirective(elementRef) {
         var _this = this;
         this.elementRef = elementRef;
@@ -522,10 +436,7 @@ var NgFileSelectDirective = (function () {
     /**
      * @return {?}
      */
-    NgFileSelectDirective.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
+    NgFileSelectDirective.prototype.ngOnInit = function () {
         var _this = this;
         this._sub = [];
         var /** @type {?} */ concurrency = this.options && this.options.concurrency || Number.POSITIVE_INFINITY;
@@ -543,10 +454,7 @@ var NgFileSelectDirective = (function () {
     /**
      * @return {?}
      */
-    NgFileSelectDirective.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
+    NgFileSelectDirective.prototype.ngOnDestroy = function () {
         this.el.removeEventListener('change', this.fileListener, false);
         this._sub.forEach(function (sub) { return sub.unsubscribe(); });
     };
@@ -555,37 +463,33 @@ var NgFileSelectDirective = (function () {
                     selector: '[ngFileSelect]'
                 },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     NgFileSelectDirective.ctorParameters = function () { return [
         { type: core.ElementRef, },
     ]; };
     NgFileSelectDirective.propDecorators = {
-        "options": [{ type: core.Input },],
-        "uploadInput": [{ type: core.Input },],
-        "uploadOutput": [{ type: core.Output },],
+        'options': [{ type: core.Input },],
+        'uploadInput': [{ type: core.Input },],
+        'uploadOutput': [{ type: core.Output },],
     };
     return NgFileSelectDirective;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
 var SampleService = (function () {
     function SampleService() {
     }
     SampleService.decorators = [
         { type: core.Injectable },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     SampleService.ctorParameters = function () { return []; };
     return SampleService;
 }());
 
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
 var NgUploaderModule = (function () {
     function NgUploaderModule() {
     }
@@ -601,7 +505,9 @@ var NgUploaderModule = (function () {
                     ]
                 },] },
     ];
-    /** @nocollapse */
+    /**
+     * @nocollapse
+     */
     NgUploaderModule.ctorParameters = function () { return []; };
     return NgUploaderModule;
 }());
