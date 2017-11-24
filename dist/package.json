@@ -1,0 +1,28 @@
+{
+  "name": "ngx-upload-2",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/snoop088/ngx-upload-2.git"
+  },
+  "author": {
+    "name": "Nikolay Dimitrov",
+    "email": "snoop088@gmail.com"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/snoop088/ngx-upload-2.git/issues"
+  },
+  "main": "ngx-upload-2.umd.js",
+  "module": "ngx-upload-2.js",
+  "jsnext:main": "ngx-upload-2.js",
+  "typings": "ngx-upload-2.d.ts",
+  "peerDependencies": {
+    "@angular/core": "^4.0.0",
+    "rxjs": "^5.1.0",
+    "zone.js": "^0.8.4"
+  }
+}
