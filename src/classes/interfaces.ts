@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 export interface UploaderOptions {
   concurrency: number;
   allowedContentTypes?: string[];
-  allowFile?: (file: UploadFile) => boolean;
+  allowFile?: (file: File) => boolean;
 }
 
 export interface BlobFile extends Blob {

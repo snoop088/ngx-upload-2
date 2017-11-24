@@ -17,7 +17,7 @@ export declare class NgUploaderService {
         sub: Subscription;
     }[];
     contentTypes: string[];
-    allowFile: (file: UploadFile) => boolean;
+    allowFile: (file: File) => boolean;
     constructor(concurrency?: number, contentTypes?: string[], allowFile?: (file: any) => boolean);
     handleFiles(incomingFiles: FileList): void;
     initInputEvents(input: EventEmitter<UploadInput>): Subscription;

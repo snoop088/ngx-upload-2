@@ -23,7 +23,7 @@ export class NgUploaderService {
   uploadScheduler: Subject<{ file: UploadFile, event: UploadInput }>;
   subs: { id: string, sub: Subscription }[];
   contentTypes: string[];
-  allowFile: (file: UploadFile) => boolean;
+  allowFile: (file: File) => boolean;
 
   constructor(concurrency: number = Number.POSITIVE_INFINITY, contentTypes: string[] = ['*'], allowFile = (file) => false) {
     this.queue = [];
@@ -40,7 +40,7 @@ export class NgUploaderService {
 
   handleFiles(incomingFiles: FileList): void {
     const allowedIncomingFiles: File[] = [].reduce.call(incomingFiles, (acc: File[], checkFile: File, i: number) => {
-      if (this.isContentTypeAllowed(checkFile.type) && this.allowFile) {
+      if (this.isContentTypeAllowed(checkFile.type) && this.allowFile(checkFile)) {
         acc = acc.concat(checkFile);
       } else {
         const rejectedFile: UploadFile = this.makeUploadFile(checkFile, i);

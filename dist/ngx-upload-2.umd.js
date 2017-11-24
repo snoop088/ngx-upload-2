@@ -55,7 +55,7 @@ var NgUploaderService = (function () {
     NgUploaderService.prototype.handleFiles = function (incomingFiles) {
         var _this = this;
         var /** @type {?} */ allowedIncomingFiles = [].reduce.call(incomingFiles, function (acc, checkFile, i) {
-            if (_this.isContentTypeAllowed(checkFile.type) && _this.allowFile) {
+            if (_this.isContentTypeAllowed(checkFile.type) && _this.allowFile(checkFile)) {
                 acc = acc.concat(checkFile);
             }
             else {
