@@ -24,7 +24,8 @@ export class NgFileSelectDirective implements OnInit, OnDestroy {
     this._sub = [];
     const concurrency = this.options && this.options.concurrency || Number.POSITIVE_INFINITY;
     const allowedContentTypes = this.options && this.options.allowedContentTypes || ['*'];
-    this.upload = new NgUploaderService(concurrency, allowedContentTypes);
+    const allowFile = this.options.allowFile;
+    this.upload = new NgUploaderService(concurrency, allowedContentTypes, allowFile);
 
     this.el = this.elementRef.nativeElement;
     this.el.addEventListener('change', this.fileListener, false);
